@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  angular-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hello-world-angular-app:${VERSION:-latest}
+    ports:
+      - "4200:80"
+    container_name: hello-world-app
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
