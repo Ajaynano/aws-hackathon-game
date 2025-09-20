@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AgGridModule } from 'ag-grid-angular';
 import { ProfileComponent } from './profile.component';
 
 @NgModule({
@@ -7,7 +8,8 @@ import { ProfileComponent } from './profile.component';
     ProfileComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    AgGridModule
   ],
   exports: [
     ProfileComponent

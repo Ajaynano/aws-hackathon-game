@@ -1,32 +1,63 @@
-<div class="profile-page">
-  <div class="profile-header">
-    <h1>User Profile</h1>
-    <button class="sign-out-btn" (click)="handleSignOut()">Sign Out</button>
-  </div>
+<div class="dashboard">
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <span class="close-btn">×</span>
+      <h2>BMW Tech Works</h2>
+    </div>
+    <ul class="nav-menu">
+      <li class="nav-item">
+        <span class="nav-icon">🏠</span>
+        <span>Home</span>
+      </li>
+      <li class="nav-item">
+        <span class="nav-icon">📊</span>
+        <span>Dashboard</span>
+      </li>
+      <li class="nav-item active">
+        <span class="nav-icon">📋</span>
+        <span>Skill Assessment</span>
+      </li>
+      <li class="nav-item">
+        <span class="nav-icon">🎯</span>
+        <span>Learning Path</span>
+      </li>
+    </ul>
+  </nav>
   
-  <div class="profile-container">
-    <div *ngIf="loading">Loading profile...</div>
-    
-    <div *ngIf="!loading" class="profile-info">
-    <div class="profile-field">
-      <label>Name:</label>
-      <span>{{ userAttributes.name || 'Not provided' }}</span>
+  <main class="main-content">
+    <div class="skill-assessment-header">
+      <div class="header-content">
+        <div class="header-left">
+          <span class="assessment-icon">📊</span>
+          <h1>Skill Assessment</h1>
+        </div>
+        <button class="new-assessment-btn">+ New Assessment</button>
+      </div>
     </div>
     
-    <div class="profile-field">
-      <label>Email:</label>
-      <span>{{ userAttributes.email }}</span>
+    <div class="assessment-content">
+      <div class="search-section">
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Search skills or employees...">
+        </div>
+        <button class="export-btn">👤 Export</button>
+      </div>
+      
+      <div class="assessment-table">
+        <ag-grid-angular
+          class="ag-theme-alpine"
+          [columnDefs]="columnDefs"
+          [rowData]="rowData"
+          [defaultColDef]="defaultColDef"
+          [pagination]="true"
+          [paginationPageSize]="10"
+          [domLayout]="'autoHeight'"
+          style="width: 100%; min-height: 400px;">
+        </ag-grid-angular>
+      </div>
     </div>
     
-    <div class="profile-field">
-      <label>Email Verified:</label>
-      <span>{{ userAttributes.email_verified === 'true' ? 'Yes' : 'No' }}</span>
-    </div>
-    
-    <div class="profile-field">
-      <label>User ID:</label>
-      <span>{{ userAttributes.sub }}</span>
-    </div>
-    </div>
-  </div>
+    <button class="sign-out-btn" (click)="handleSignOut()">Sign Out</button>
+  </main>
 </div>

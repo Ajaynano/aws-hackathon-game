@@ -1,76 +1,148 @@
-.profile-page
-  min-height: 100vh
-  background: #f8f9fa
-  padding: 20px
-
-.profile-header
+.dashboard
   display: flex
-  justify-content: space-between
-  align-items: center
-  max-width: 800px
-  margin: 0 auto 30px auto
-  padding: 20px 0
-  border-bottom: 2px solid #007bff
+  min-height: 100vh
+  background: #f5f5f5
 
-  h1
+.sidebar
+  width: 250px
+  background: #2c3e50
+  color: white
+  padding: 0
+  
+  .sidebar-header
+    padding: 20px
+    border-bottom: 1px solid #34495e
+    display: flex
+    align-items: center
+    justify-content: space-between
+    
+    .close-btn
+      font-size: 24px
+      cursor: pointer
+      
+    h2
+      margin: 0
+      font-size: 18px
+      font-weight: 600
+
+  .nav-menu
+    list-style: none
+    padding: 0
     margin: 0
-    color: #495057
-    font-size: 32px
+    
+    .nav-item
+      display: flex
+      align-items: center
+      padding: 15px 20px
+      cursor: pointer
+      transition: background 0.2s
+      
+      &:hover
+        background: #34495e
+        
+      &.active
+        background: #3498db
+        
+      .nav-icon
+        margin-right: 12px
+        font-size: 16px
+
+.main-content
+  flex: 1
+  padding: 0
+  
+  .skill-assessment-header
+    background: #34495e
+    padding: 20px 30px
+    
+    .header-content
+      display: flex
+      justify-content: space-between
+      align-items: center
+      
+      .header-left
+        display: flex
+        align-items: center
+        color: white
+        
+        .assessment-icon
+          margin-right: 12px
+          font-size: 24px
+          
+        h1
+          margin: 0
+          font-size: 24px
+          font-weight: 600
+          
+      .new-assessment-btn
+        background: #3498db
+        color: white
+        border: none
+        padding: 10px 20px
+        border-radius: 4px
+        cursor: pointer
+        font-weight: 500
+        
+        &:hover
+          background: #2980b9
+
+  .assessment-content
+    padding: 30px
+    
+    .search-section
+      display: flex
+      justify-content: space-between
+      align-items: center
+      margin-bottom: 20px
+      
+      .search-bar
+        position: relative
+        flex: 1
+        max-width: 400px
+        
+        .search-icon
+          position: absolute
+          left: 12px
+          top: 50%
+          transform: translateY(-50%)
+          color: #666
+          
+        input
+          width: 100%
+          padding: 10px 10px 10px 40px
+          border: 1px solid #ddd
+          border-radius: 4px
+          font-size: 14px
+          
+      .export-btn
+        background: #95a5a6
+        color: white
+        border: none
+        padding: 10px 16px
+        border-radius: 4px
+        cursor: pointer
+        
+        &:hover
+          background: #7f8c8d
+
+  .assessment-table
+    background: white
+    border-radius: 8px
+    overflow: hidden
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1)
+    padding: 20px
 
   .sign-out-btn
-    background-color: #dc3545
+    position: fixed
+    bottom: 20px
+    right: 20px
+    background: #e74c3c
     color: white
     border: none
     padding: 12px 24px
     border-radius: 6px
     cursor: pointer
-    font-size: 16px
     font-weight: 500
     
     &:hover
-      background-color: #c82333
-
-.profile-container
-  max-width: 800px
-  margin: 0 auto
-  padding: 30px
-  background: white
-  border-radius: 12px
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
-  border: 1px solid #e9ecef
-
-.profile-info
-  display: grid
-  gap: 20px
-
-.profile-field
-  display: flex
-  align-items: center
-  padding: 15px
-  background: #f8f9fa
-  border-radius: 8px
-  border-left: 4px solid #007bff
-  
-  label
-    font-weight: 600
-    width: 180px
-    color: #495057
-    font-size: 16px
-    
-  span
-    flex: 1
-    color: #212529
-    font-size: 16px
-    padding: 8px 12px
-    background: white
-    border-radius: 4px
-    border: 1px solid #ced4da
-
-  &:nth-child(even)
-    border-left-color: #28a745
-    
-  &:nth-child(3)
-    border-left-color: #ffc107
-    
-  &:nth-child(4)
-    border-left-color: #17a2b8
+      background: #c0392b

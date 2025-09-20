@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { AgGridModule } from 'ag-grid-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +39,7 @@ if (typeof window !== 'undefined') {
     AppRoutingModule,
     AmplifyAuthenticatorModule,
     FormsModule,
+    AgGridModule,
     ProfileModule
   ],
   providers: [],
