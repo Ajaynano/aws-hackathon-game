@@ -1,22 +1,16 @@
- <amplify-authenticator [loginMechanisms]="['email']"  [formFields]="formFields" [signUpAttributes]="['name']">
+<div *ngIf="sessionExpired" class="session-expired">
+  <h2>Session Expired</h2>
+  <p>Your session has expired. Please login again.</p>
+</div>
+
+<amplify-authenticator [loginMechanisms]="['email']" [formFields]="formFields" [signUpAttributes]="['name']" *ngIf="!sessionExpired">
   <ng-template
     amplifySlot="authenticated"
     let-user="user"
     let-signOut="signOut"
   >
-    <div [hidden]="true">{{ onUserChange(user) }}</div>
-    <h1>Welcome {{ (currentUser?.attributes?.name || user.attributes?.name) || user.username }}!</h1>
-    
-    <div *ngIf="!isEditingName">
-      <button (click)="editName(currentUser?.attributes?.name || user.attributes?.name)">Edit Name</button>
-    </div>
-    
-    <div *ngIf="isEditingName">
-      <input [(ngModel)]="newName" placeholder="Enter new name" />
-      <button (click)="saveName()">Save</button>
-      <button (click)="cancelEdit()">Cancel</button>
-    </div>
-    
+    <div [hidden]="true">{{ onUserAuthenticated() }}</div>
+    <h1>Welcome {{ user.username }}!</h1>
     <button (click)="signOut()">Sign Out</button>
   </ng-template>
 </amplify-authenticator>

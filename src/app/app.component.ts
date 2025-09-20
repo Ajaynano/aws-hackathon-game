@@ -1,18 +1,16 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
-import { updateUserAttributes, fetchUserAttributes } from 'aws-amplify/auth';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { signOut } from 'aws-amplify/auth';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'hello-world';
-  isEditingName = false;
-  newName = '';
-  currentUser: any = null;
-
-  constructor(private cdr: ChangeDetectorRef) {}
+  sessionExpired = false;
+  private sessionTimer: any;
+  private readonly SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
 
   formFields = {
     signUp: {
@@ -31,52 +29,33 @@ export class AppComponent {
     },
   };
 
-  editName(currentName: string) {
-    this.isEditingName = true;
-    this.newName = currentName || '';
+  ngOnInit() {
+    this.startSessionTimer();
   }
 
-  onUserChange(user: any) {
-    this.currentUser = user;
-  }
-
-  async saveName() {
-    if (!this.newName.trim()) {
-      alert('Please enter a valid name');
-      return;
+  ngOnDestroy() {
+    if (this.sessionTimer) {
+      clearTimeout(this.sessionTimer);
     }
+  }
 
+  startSessionTimer() {
+    this.sessionTimer = setTimeout(() => {
+      this.expireSession();
+    }, this.SESSION_TIMEOUT);
+  }
+
+  async expireSession() {
+    this.sessionExpired = true;
     try {
-      console.log('Updating name to:', this.newName);
-      
-      const result = await updateUserAttributes({
-        userAttributes: {
-          'name': this.newName.trim()
-        }
-      });
-      
-      console.log('Update result:', result);
-      
-      // Refresh user attributes
-      const updatedAttributes = await fetchUserAttributes();
-      console.log('Updated attributes:', updatedAttributes);
-      
-      if (this.currentUser) {
-        this.currentUser.attributes = updatedAttributes;
-      }
-      
-      this.isEditingName = false;
-      this.cdr.detectChanges();
-      
-      alert('Name updated successfully!');
+      await signOut();
     } catch (error) {
-      console.error('Error updating name:', error);
-      alert('Failed to update name: ' + error);
+      console.error('Error signing out:', error);
     }
   }
 
-  cancelEdit() {
-    this.isEditingName = false;
-    this.newName = '';
+  onUserAuthenticated() {
+    this.sessionExpired = false;
+    this.startSessionTimer();
   }
 }

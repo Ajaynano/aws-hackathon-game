@@ -16,6 +16,18 @@ Amplify.configure({
   }
 });
 
+// Configure session storage for auth tokens
+if (typeof window !== 'undefined') {
+  const originalSetItem = localStorage.setItem;
+  localStorage.setItem = function(key: string, value: string) {
+    if (key.includes('amplify') || key.includes('cognito')) {
+      sessionStorage.setItem(key, value);
+    } else {
+      originalSetItem.call(this, key, value);
+    }
+  };
+}
+
 @NgModule({
   declarations: [
     AppComponent
