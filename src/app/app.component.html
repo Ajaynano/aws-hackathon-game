@@ -4,7 +4,19 @@
     let-user="user"
     let-signOut="signOut"
   >
-    <h1>Welcome {{ user.username }}!</h1>
+    <div [hidden]="true">{{ onUserChange(user) }}</div>
+    <h1>Welcome {{ (currentUser?.attributes?.name || user.attributes?.name) || user.username }}!</h1>
+    
+    <div *ngIf="!isEditingName">
+      <button (click)="editName(currentUser?.attributes?.name || user.attributes?.name)">Edit Name</button>
+    </div>
+    
+    <div *ngIf="isEditingName">
+      <input [(ngModel)]="newName" placeholder="Enter new name" />
+      <button (click)="saveName()">Save</button>
+      <button (click)="cancelEdit()">Cancel</button>
+    </div>
+    
     <button (click)="signOut()">Sign Out</button>
   </ng-template>
 </amplify-authenticator>
