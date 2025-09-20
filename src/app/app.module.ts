@@ -3,6 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { Amplify } from 'aws-amplify';
+import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
+
+Amplify.configure({
+  Auth: {
+    Cognito: {
+      userPoolId: 'us-east-1_6W6n8xHuJ',
+      userPoolClientId: '1gpb3go1l3ppgdp6akq4dpft32'
+    }
+  }
+});
 
 @NgModule({
   declarations: [
@@ -10,7 +21,8 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AmplifyAuthenticatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
