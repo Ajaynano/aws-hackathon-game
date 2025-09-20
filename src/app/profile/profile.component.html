@@ -1,0 +1,27 @@
+<div class="profile-container">
+  <h2>User Profile</h2>
+  
+  <div *ngIf="loading">Loading profile...</div>
+  
+  <div *ngIf="!loading" class="profile-info">
+    <div class="profile-field">
+      <label>Name:</label>
+      <span>{{ userAttributes.name || 'Not provided' }}</span>
+    </div>
+    
+    <div class="profile-field">
+      <label>Email:</label>
+      <span>{{ userAttributes.email }}</span>
+    </div>
+    
+    <div class="profile-field">
+      <label>Email Verified:</label>
+      <span>{{ userAttributes.email_verified === 'true' ? 'Yes' : 'No' }}</span>
+    </div>
+    
+    <div class="profile-field">
+      <label>User ID:</label>
+      <span>{{ userAttributes.sub }}</span>
+    </div>
+  </div>
+</div>

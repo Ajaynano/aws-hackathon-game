@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Amplify } from 'aws-amplify';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
+import { ProfileModule } from './profile/profile.module';
 
 Amplify.configure({
   Auth: {
@@ -36,7 +37,8 @@ if (typeof window !== 'undefined') {
     BrowserModule,
     AppRoutingModule,
     AmplifyAuthenticatorModule,
-    FormsModule
+    FormsModule,
+    ProfileModule
   ],
   providers: [],
   bootstrap: [AppComponent]

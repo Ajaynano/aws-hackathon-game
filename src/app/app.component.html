@@ -10,7 +10,10 @@
     let-signOut="signOut"
   >
     <div [hidden]="true">{{ onUserAuthenticated() }}</div>
-    <h1>Welcome {{ user.username }}!</h1>
-    <button (click)="signOut()">Sign Out</button>
+    <div class="header">
+      <h1>Welcome to Skill Assessment Portal</h1>
+      <button class="sign-out-btn" (click)="signOut()">Sign Out</button>
+    </div>
+    <app-profile></app-profile>
   </ng-template>
 </amplify-authenticator>
