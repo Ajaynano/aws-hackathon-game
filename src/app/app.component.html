@@ -3,17 +3,88 @@
   <p>Your session has expired. Please login again.</p>
 </div>
 
-<amplify-authenticator [loginMechanisms]="['email']" [formFields]="formFields" [signUpAttributes]="['name']" *ngIf="!sessionExpired">
-  <ng-template
-    amplifySlot="authenticated"
-    let-user="user"
-    let-signOut="signOut"
-  >
-    <div [hidden]="true">{{ onUserAuthenticated() }}</div>
-    <div class="header">
-      <h1>Welcome to Skill Assessment Portal</h1>
-      <button class="sign-out-btn" (click)="signOut()">Sign Out</button>
+<div *ngIf="!sessionExpired">
+  <div class="login-container" *ngIf="!isAuthenticated">
+    <div class="learning-theme">
+      <h1>Skill Assessment Portal</h1>
+      <p class="subtitle">Test your knowledge across multiple technologies</p>
+      
+      <div class="tech-categories">
+        <div class="category cloud">
+          <h3>Cloud Platforms</h3>
+          <div class="tech-tags">
+            <span class="tag aws">AWS</span>
+            <span class="tag azure">Azure</span>
+            <span class="tag gcp">GCP</span>
+          </div>
+        </div>
+        
+        <div class="category devops">
+          <h3>DevOps & Tools</h3>
+          <div class="tech-tags">
+            <span class="tag">Docker</span>
+            <span class="tag">Kubernetes</span>
+            <span class="tag">Jenkins</span>
+            <span class="tag">Terraform</span>
+          </div>
+        </div>
+        
+        <div class="category frontend">
+          <h3>Frontend</h3>
+          <div class="tech-tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">React</span>
+            <span class="tag">Angular</span>
+            <span class="tag">Vue.js</span>
+          </div>
+        </div>
+        
+        <div class="category backend">
+          <h3>Backend</h3>
+          <div class="tech-tags">
+            <span class="tag">Node.js</span>
+            <span class="tag">Python</span>
+            <span class="tag">Java</span>
+            <span class="tag">C#</span>
+          </div>
+        </div>
+        
+        <div class="category agile">
+          <h3>Agile & Scrum</h3>
+          <div class="tech-tags">
+            <span class="tag">Scrum</span>
+            <span class="tag">Kanban</span>
+            <span class="tag">Sprint Planning</span>
+            <span class="tag">User Stories</span>
+          </div>
+        </div>
+        
+        <div class="category pmp">
+          <h3>Project Management</h3>
+          <div class="tech-tags">
+            <span class="tag pmp-tag">PMP</span>
+            <span class="tag">PMBOK</span>
+            <span class="tag">Risk Management</span>
+            <span class="tag">Stakeholder</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <app-profile></app-profile>
-  </ng-template>
-</amplify-authenticator>
+    
+    <div class="auth-section">
+      <amplify-authenticator [loginMechanisms]="['email']" [formFields]="formFields" [signUpAttributes]="['name']">
+        <ng-template
+          amplifySlot="authenticated"
+          let-user="user"
+          let-signOut="signOut"
+        >
+          <div [hidden]="true">{{ onUserAuthenticated() }}</div>
+        </ng-template>
+      </amplify-authenticator>
+    </div>
+  </div>
+  
+  <div *ngIf="isAuthenticated">
+    <app-profile [signOutFn]="handleSignOut.bind(this)"></app-profile>
+  </div>
+</div>

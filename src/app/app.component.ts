@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { signOut } from 'aws-amplify/auth';
+import { signOut, getCurrentUser } from 'aws-amplify/auth';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +9,7 @@ import { signOut } from 'aws-amplify/auth';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'hello-world';
   sessionExpired = false;
+  isAuthenticated = false;
   private sessionTimer: any;
   private readonly SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
 
@@ -29,8 +30,13 @@ export class AppComponent implements OnInit, OnDestroy {
     },
   };
 
-  ngOnInit() {
-    this.startSessionTimer();
+
+
+  async ngOnInit() {
+    await this.checkAuthState();
+    if (this.isAuthenticated) {
+      this.startSessionTimer();
+    }
   }
 
   ngOnDestroy() {
@@ -56,6 +62,28 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onUserAuthenticated() {
     this.sessionExpired = false;
+    this.isAuthenticated = true;
     this.startSessionTimer();
+  }
+
+  async handleSignOut() {
+    try {
+      await signOut();
+      this.isAuthenticated = false;
+      if (this.sessionTimer) {
+        clearTimeout(this.sessionTimer);
+      }
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  }
+
+  async checkAuthState() {
+    try {
+      await getCurrentUser();
+      this.isAuthenticated = true;
+    } catch {
+      this.isAuthenticated = false;
+    }
   }
 }

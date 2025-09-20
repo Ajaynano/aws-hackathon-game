@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { fetchUserAttributes } from 'aws-amplify/auth';
 
 @Component({
@@ -7,6 +7,7 @@ import { fetchUserAttributes } from 'aws-amplify/auth';
   styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent implements OnInit {
+  @Input() signOutFn: any;
   userAttributes: any = {};
   loading = true;
 
@@ -21,6 +22,12 @@ export class ProfileComponent implements OnInit {
     } catch (error) {
       console.error('Error loading user profile:', error);
       this.loading = false;
+    }
+  }
+
+  async handleSignOut() {
+    if (this.signOutFn) {
+      await this.signOutFn();
     }
   }
 }

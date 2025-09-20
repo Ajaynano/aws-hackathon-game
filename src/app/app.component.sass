@@ -1,3 +1,84 @@
+.login-container
+  display: flex
+  min-height: 100vh
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+
+.learning-theme
+  flex: 1
+  padding: 40px
+  color: white
+  display: flex
+  flex-direction: column
+  justify-content: center
+
+  h1
+    font-size: 48px
+    margin-bottom: 10px
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3)
+
+  .subtitle
+    font-size: 20px
+    margin-bottom: 40px
+    opacity: 0.9
+
+.tech-categories
+  display: grid
+  grid-template-columns: 1fr 1fr 1fr
+  gap: 25px
+
+.category
+  background: rgba(255,255,255,0.1)
+  padding: 25px
+  border-radius: 15px
+  backdrop-filter: blur(10px)
+  border: 1px solid rgba(255,255,255,0.2)
+
+  h3
+    margin: 0 0 15px 0
+    font-size: 18px
+    color: #fff
+
+.tech-tags
+  display: flex
+  flex-wrap: wrap
+  gap: 8px
+
+.tag
+  background: rgba(255,255,255,0.2)
+  padding: 6px 12px
+  border-radius: 20px
+  font-size: 12px
+  border: 1px solid rgba(255,255,255,0.3)
+  transition: all 0.3s ease
+
+  &:hover
+    background: rgba(255,255,255,0.3)
+    transform: translateY(-2px)
+
+  &.aws
+    background: #ff9900
+    color: white
+
+  &.azure
+    background: #0078d4
+    color: white
+
+  &.gcp
+    background: #4285f4
+    color: white
+
+  &.pmp-tag
+    background: #28a745
+    color: white
+
+.auth-section
+  flex: 0 0 500px
+  background: white
+  display: flex
+  align-items: center
+  justify-content: center
+  padding: 40px
+
 .header
   display: flex
   justify-content: space-between

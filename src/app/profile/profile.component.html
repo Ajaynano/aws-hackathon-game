@@ -1,9 +1,13 @@
-<div class="profile-container">
-  <h2>User Profile</h2>
+<div class="profile-page">
+  <div class="profile-header">
+    <h1>User Profile</h1>
+    <button class="sign-out-btn" (click)="handleSignOut()">Sign Out</button>
+  </div>
   
-  <div *ngIf="loading">Loading profile...</div>
-  
-  <div *ngIf="!loading" class="profile-info">
+  <div class="profile-container">
+    <div *ngIf="loading">Loading profile...</div>
+    
+    <div *ngIf="!loading" class="profile-info">
     <div class="profile-field">
       <label>Name:</label>
       <span>{{ userAttributes.name || 'Not provided' }}</span>
@@ -22,6 +26,7 @@
     <div class="profile-field">
       <label>User ID:</label>
       <span>{{ userAttributes.sub }}</span>
+    </div>
     </div>
   </div>
 </div>
